@@ -17,43 +17,59 @@
         "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
         "viewType": "server",
         "nodeType": "start",
-        "name": "",
-        "path": "getPost",
+        "name": "seoQuestionSuggestion",
+        "path": "seoQuestionSuggestion",
         "uploadpath": "",
         "summary": "",
         "description": "",
-        "method": "get",
+        "method": "post",
         "sequenceId": "",
         "consumes": "",
         "produces": "",
         "filetype": "path",
         "acceptFileUpload": false,
         "httpOptions": {
-            "getPost": {
-                "get": {
+            "seoQuestionSuggestion": {
+                "post": {
                     "summary": "",
                     "description": "",
                     "consumes": [],
                     "produces": [],
-                    "parameters": [],
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "keyword",
+                            "description": "add a keyword",
+                            "required": false
+                        }
+                    ],
                     "responses": {}
                 }
             }
         },
         "editableListData": {
             "responses": [],
-            "params": [],
+            "params": [
+                {
+                    "key": "keyword",
+                    "desc": "add a keyword",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_EZniyyI2QODB9zpV",
+                    "valid": true
+                }
+            ],
             "produces": [],
             "consumes": []
         },
         "inputs": 0,
         "outputs": 1,
         "category": "HTTP",
-        "x": 140,
-        "y": 80,
+        "x": 125,
+        "y": 220,
         "wires": [
             [
-                "sd_XkiHTrInpYVtjcdM"
+                "sd_5MBPbRvj14Ey8js5"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -80,7 +96,7 @@
         "headers": {},
         "responseBody": {
             "type": "bh",
-            "value": "response",
+            "value": "preparedQuestion",
             "ssd_typedInputField": true
         },
         "httpcode": {
@@ -91,8 +107,8 @@
         "responseType": "obj",
         "responseMapping": {
             "status": 200,
-            "obj": "bh.response",
-            "send": "bh.response"
+            "obj": "bh.preparedQuestion",
+            "send": "bh.preparedQuestion"
         },
         "inputs": 1,
         "outputs": 0,
@@ -106,8 +122,8 @@
         },
         "functionName": "sd_el00JWMdLwCt5sLt",
         "category": "HTTP",
-        "x": 440,
-        "y": 80,
+        "x": 965,
+        "y": 220,
         "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -138,9 +154,11 @@
             "mapVarType": "bh",
             "mapVarValue": "response"
         },
-        "headers": {},
-        "headersObj": [],
-        "headerMappingObj": {},
+        "headerMapping": "bh.userAgent",
+        "headerMappingObj": {
+            "mapVarType": "bh",
+            "mapVarValue": "userAgent"
+        },
         "params": {},
         "paramsObj": [],
         "paramMappingObj": {},
@@ -172,11 +190,11 @@
         },
         "functionName": "sd_blCO2tVU0C5MQfxs",
         "category": "HTTP",
-        "x": 345,
-        "y": 80,
+        "x": 845,
+        "y": 340,
         "wires": [
             [
-                "sd_el00JWMdLwCt5sLt"
+                "sd_r9al7KTtK93ijKhm"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -190,14 +208,276 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nconsole.log(bh);",
+        "script": "// bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nbh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=en-US&q=${bh.encodedKeyword.encodedURL}`;\n\n// encodedKeyword",
         "functionName": "sd_XkiHTrInpYVtjcdM",
         "category": "Function",
-        "x": 245,
-        "y": 80,
+        "x": 725,
+        "y": 340,
+        "wires": [
+            [
+                "sd_fNEqmjVUCbk8gy5A"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_K5SPJOh3dXt9OMLw",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+            "type": "tab",
+            "createdDate": "2021-11-17T19:21:18.164Z",
+            "label": "encode_decode_url",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RkaByDaKfikztWgv",
+            "flowName": "encodeURL"
+        },
+        "inputVariables": [
+            {
+                "key": "url",
+                "map": true,
+                "valueType": "bh",
+                "value": "currentQKeyword"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "encodedKeyword",
+                "mapVarName": "response",
+                "localVar": "bh.encodedKeyword"
+            }
+        ],
+        "callService": "./encode_decode_url",
+        "startName": "encodeURL",
+        "inputParams": [
+            "bh.currentQKeyword"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_K5SPJOh3dXt9OMLw",
+        "category": "General",
+        "x": 565,
+        "y": 320,
+        "wires": [
+            [
+                "sd_HHX1h3RwLA514Zw0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_5MBPbRvj14Ey8js5",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "// bh.encodedKeyword\n\nbh.questionType = [\n    \"how\",\n    \"where\",\n    \"why\",\n    \"when\",\n    \"what\",\n    \"who\"\n];\n\nbh.startIndex = 0;\n\nbh.preparedQuestion = [];",
+        "functionName": "sd_5MBPbRvj14Ey8js5",
+        "category": "Function",
+        "x": 250,
+        "y": 220,
+        "wires": [
+            [
+                "sd_SlvgH0yJnZjjRwfj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_SlvgH0yJnZjjRwfj",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "startIndex",
+        "propertyType": "bh",
+        "propertyGv": "bh.startIndex",
+        "rules": [
+            {
+                "t": "lt",
+                "v": "questionType.length",
+                "vt": "bh",
+                "gv": "bh.questionType.length"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_SlvgH0yJnZjjRwfj",
+        "category": "Function",
+        "x": 365,
+        "y": 220,
+        "wires": [
+            [
+                "sd_OIZIQmUWVmoe7XIb"
+            ],
+            [
+                "sd_el00JWMdLwCt5sLt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_OIZIQmUWVmoe7XIb",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.currentQKeyword = bh.questionType[bh.startIndex] + ' ' +  bh.input.body.keyword;",
+        "functionName": "sd_OIZIQmUWVmoe7XIb",
+        "category": "Function",
+        "x": 505,
+        "y": 120,
+        "wires": [
+            [
+                "sd_K5SPJOh3dXt9OMLw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_r9al7KTtK93ijKhm",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.preparedQuestion.push({\n    keyword: bh.input.body.keyword,\n    questions: bh.response.payload[1],\n    questionType: bh.questionType[bh.startIndex]\n});\nbh.startIndex = bh.startIndex + 1;",
+        "functionName": "sd_r9al7KTtK93ijKhm",
+        "category": "Function",
+        "x": 885,
+        "y": 60,
+        "wires": [
+            [
+                "sd_SlvgH0yJnZjjRwfj"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_fNEqmjVUCbk8gy5A",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS",
+            "type": "tab",
+            "createdDate": "2021-11-17T20:58:17.448Z",
+            "label": "staticdata",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_Ev4IMCpys87dPWnQ",
+            "flowName": "randomAgent"
+        },
+        "inputVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "userAgent",
+                "mapVarName": "response",
+                "localVar": "bh.userAgent"
+            }
+        ],
+        "callService": "./staticdata",
+        "startName": "randomAgent",
+        "inputParams": [],
+        "accept_bh": false,
+        "functionName": "sd_fNEqmjVUCbk8gy5A",
+        "category": "General",
+        "x": 765,
+        "y": 60,
         "wires": [
             [
                 "sd_blCO2tVU0C5MQfxs"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_HHX1h3RwLA514Zw0",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS",
+            "type": "tab",
+            "createdDate": "2021-11-17T20:58:17.448Z",
+            "label": "staticdata",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_8hsmsTc8jtnv53qZ",
+            "flowName": "getGoogleDomain"
+        },
+        "inputVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "googleDomain",
+                "mapVarName": "response",
+                "localVar": "bh.googleDomain"
+            }
+        ],
+        "callService": "./staticdata",
+        "startName": "getGoogleDomain",
+        "inputParams": [],
+        "accept_bh": false,
+        "functionName": "sd_HHX1h3RwLA514Zw0",
+        "category": "General",
+        "x": 625,
+        "y": 80,
+        "wires": [
+            [
+                "sd_XkiHTrInpYVtjcdM"
             ]
         ],
         "__n_excludedFromValidation__": {},
