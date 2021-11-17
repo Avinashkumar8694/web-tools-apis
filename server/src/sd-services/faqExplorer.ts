@@ -13,6 +13,7 @@ import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { Middleware } from '../middleware/Middleware'; //_splitter_
 import * as settings from '../config/config'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
+import { GenericRDBMSOperations } from '../utils/ndefault-sql/ExecuteSql/GenericRDBMSOperations'; //_splitter_
 import * as SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg from './encode_decode_url'; //_splitter_
 import * as SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS from './staticdata'; //_splitter_
 //append_imports_end
@@ -178,11 +179,44 @@ export class faqExplorer {
       bh.startIndex = 0;
 
       bh.preparedQuestion = [];
-      bh = await this.sd_SlvgH0yJnZjjRwfj(bh);
+
+      bh.inserSQLtQuery = `INSERT INTO keyword_planner (keyword) VALUES ("${bh.input.body.keyword}")`;
+      bh = await this.sd_M0w2MHIDZPgQenF6(bh);
       //appendnew_next_sd_5MBPbRvj14Ey8js5
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_5MBPbRvj14Ey8js5');
+    }
+  }
+
+  async sd_M0w2MHIDZPgQenF6(bh) {
+    try {
+      let configObj = this.sdService.getConfigObj(
+        'db-config',
+        'sd_3oeBBHXnj8SVafWm'
+      );
+      let connectionName;
+      if (
+        configObj &&
+        configObj.hasOwnProperty('dbOption') &&
+        configObj.dbOption.hasOwnProperty('name')
+      ) {
+        connectionName = configObj.dbOption.name;
+      } else {
+        throw new Error('Cannot find the selected config name');
+      }
+      let params = [];
+      params = params ? params : [];
+      bh.sqlInsertResponse = await new GenericRDBMSOperations().executeSQL(
+        connectionName,
+        bh.inserSQLtQuery,
+        params
+      );
+      bh = await this.sd_SlvgH0yJnZjjRwfj(bh);
+      //appendnew_next_sd_M0w2MHIDZPgQenF6
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_M0w2MHIDZPgQenF6');
     }
   }
 
