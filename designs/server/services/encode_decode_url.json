@@ -1,0 +1,493 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "type": "tab",
+        "createdDate": "2021-11-17T19:21:18.164Z",
+        "label": "encode_decode_url",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "encode_decode_url",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_RkaByDaKfikztWgv",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "encodeURL",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "url",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "encodeURL",
+        "category": "General",
+        "x": 85,
+        "y": 160,
+        "wires": [
+            [
+                "sd_egnWKpcL90veUtVt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "encode_decode_url"
+    },
+    {
+        "id": "sd_egnWKpcL90veUtVt",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const { encode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        encodedURL: encode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        encodedURL: \"url is required\",\n        httpStatus: 400\n    }\n}",
+        "functionName": "sd_egnWKpcL90veUtVt",
+        "category": "Function",
+        "x": 185,
+        "y": 160,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true,
+        "serviceName": "encode_decode_url"
+    },
+    {
+        "id": "sd_w8syrUhPgCP4Kfz6",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "encodeurl",
+        "path": "encodeurl",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "encodeurl": {
+                "post": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "encode url",
+                            "description": "add a url o encode",
+                            "required": true
+                        }
+                    ],
+                    "responses": {}
+                }
+            }
+        },
+        "uploadFileOptions": {},
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "encode url",
+                    "desc": "add a url o encode",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_Kcz5ALjwoiINCB1l",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 80,
+        "y": 80,
+        "wires": [
+            [
+                "sd_oJzOFIwiI4op9z57"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "encode_decode_url",
+        "functionName": "sd_w8syrUhPgCP4Kfz6"
+    },
+    {
+        "id": "sd_tuoZuKJO8tvLgHED",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "encodeResponse.encodedURL",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh",
+            "value": "encodeResponse.httpStatus",
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "responseMapping": {
+            "status": "bh.encodeResponse.httpStatus",
+            "txt": "bh.encodeResponse.encodedURL",
+            "send": "bh.encodeResponse.encodedURL"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_tuoZuKJO8tvLgHED",
+        "category": "HTTP",
+        "x": 345,
+        "y": 80,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_oJzOFIwiI4op9z57",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+            "type": "tab",
+            "createdDate": "2021-11-17T19:21:18.164Z",
+            "label": "encode_decode_url",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RkaByDaKfikztWgv",
+            "flowName": "encodeURL"
+        },
+        "inputVariables": [
+            {
+                "key": "url",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.url"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "encodeResponse",
+                "mapVarName": "response",
+                "localVar": "bh.encodeResponse"
+            }
+        ],
+        "callService": "./encode_decode_url",
+        "startName": "encodeURL",
+        "inputParams": [
+            "bh.input.body.url"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_oJzOFIwiI4op9z57",
+        "category": "General",
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "sd_tuoZuKJO8tvLgHED"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_La2g7qisQ2KN3h7p",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "dncodeURL",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "url",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "dncodeURL",
+        "category": "General",
+        "x": 85,
+        "y": 360,
+        "wires": [
+            [
+                "sd_AYWwKPM8gskMBjJy"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "encode_decode_url"
+    },
+    {
+        "id": "sd_AYWwKPM8gskMBjJy",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const { encode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        decodedURL: decode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        decodedURL: \"url is required\",\n        httpStatus: 400\n    }\n}",
+        "functionName": "sd_AYWwKPM8gskMBjJy",
+        "category": "Function",
+        "x": 185,
+        "y": 360,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_X5d79D7kMtOW5kHq",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "decodeurl",
+        "path": "decodeurl",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "decodeurl": {
+                "post": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "encode url",
+                            "description": "add a url o encode",
+                            "required": true
+                        }
+                    ],
+                    "responses": {}
+                }
+            }
+        },
+        "uploadFileOptions": {},
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "encode url",
+                    "desc": "add a url o encode",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_Kcz5ALjwoiINCB1l",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "sd_tl4Z0ArEFjTpAVgp"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "encode_decode_url",
+        "functionName": "sd_X5d79D7kMtOW5kHq"
+    },
+    {
+        "id": "sd_HvWerJlIesW8au3Y",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "encodeResponse.decodedURL",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh",
+            "value": "encodeResponse.httpStatus",
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "responseMapping": {
+            "status": "bh.encodeResponse.httpStatus",
+            "txt": "bh.encodeResponse.decodedURL",
+            "send": "bh.encodeResponse.decodedURL"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_HvWerJlIesW8au3Y",
+        "category": "HTTP",
+        "x": 345,
+        "y": 280,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_tl4Z0ArEFjTpAVgp",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
+            "type": "tab",
+            "createdDate": "2021-11-17T19:21:18.164Z",
+            "label": "encode_decode_url",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_La2g7qisQ2KN3h7p",
+            "flowName": "dncodeURL"
+        },
+        "inputVariables": [
+            {
+                "key": "url",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.url"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "encodeResponse",
+                "mapVarName": "response",
+                "localVar": "bh.encodeResponse"
+            }
+        ],
+        "callService": "./encode_decode_url",
+        "startName": "dncodeURL",
+        "inputParams": [
+            "bh.input.body.url"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_tl4Z0ArEFjTpAVgp",
+        "category": "General",
+        "x": 200,
+        "y": 280,
+        "wires": [
+            [
+                "sd_HvWerJlIesW8au3Y"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    }
+]

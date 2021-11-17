@@ -13,6 +13,8 @@ import { SDBaseService } from '../services/SDBaseService'; //_splitter_
 import { Middleware } from '../middleware/Middleware'; //_splitter_
 import * as settings from '../config/config'; //_splitter_
 import log from '../utils/Logger'; //_splitter_
+import * as SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg from './encode_decode_url'; //_splitter_
+import * as SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS from './staticdata'; //_splitter_
 //append_imports_end
 export class faqExplorer {
   private sdService = new SDBaseService();
@@ -96,29 +98,43 @@ export class faqExplorer {
   private mountAllPaths() {
     log.debug('mounting all paths for service :: faqExplorer');
 
-    if (!this.swaggerDocument['paths']['/getPost']) {
-      this.swaggerDocument['paths']['/getPost'] = {
-        get: {
+    if (!this.swaggerDocument['paths']['/seoQuestionSuggestion']) {
+      this.swaggerDocument['paths']['/seoQuestionSuggestion'] = {
+        post: {
           summary: '',
           description: '',
           consumes: [],
           produces: [],
-          parameters: [],
+          parameters: [
+            {
+              in: 'body',
+              name: 'keyword',
+              description: 'add a keyword',
+              required: false,
+            },
+          ],
           responses: {},
         },
       };
     } else {
-      this.swaggerDocument['paths']['/getPost']['get'] = {
+      this.swaggerDocument['paths']['/seoQuestionSuggestion']['post'] = {
         summary: '',
         description: '',
         consumes: [],
         produces: [],
-        parameters: [],
+        parameters: [
+          {
+            in: 'body',
+            name: 'keyword',
+            description: 'add a keyword',
+            required: false,
+          },
+        ],
         responses: {},
       };
     }
-    this.app['get'](
-      `${this.serviceBasePath}/getPost`,
+    this.app['post'](
+      `${this.serviceBasePath}/seoQuestionSuggestion`,
       cookieParser(),
       this.sdService.getMiddlesWaresBySequenceId(
         null,
@@ -135,7 +151,7 @@ export class faqExplorer {
             res,
             next
           );
-          bh = await this.sd_XkiHTrInpYVtjcdM(bh);
+          bh = await this.sd_5MBPbRvj14Ey8js5(bh);
           //appendnew_next_sd_l7v0aBED78AfqR9t
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_l7v0aBED78AfqR9t');
@@ -153,15 +169,128 @@ export class faqExplorer {
 
   //appendnew_flow_faqExplorer_start
 
+  async sd_5MBPbRvj14Ey8js5(bh) {
+    try {
+      // bh.encodedKeyword
+
+      bh.questionType = ['how', 'where', 'why', 'when', 'what', 'who'];
+
+      bh.startIndex = 0;
+
+      bh.preparedQuestion = [];
+      bh = await this.sd_SlvgH0yJnZjjRwfj(bh);
+      //appendnew_next_sd_5MBPbRvj14Ey8js5
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_5MBPbRvj14Ey8js5');
+    }
+  }
+
+  async sd_SlvgH0yJnZjjRwfj(bh) {
+    try {
+      let otherwiseFlag = true;
+      if (
+        this.sdService.operators['lt'](
+          bh.startIndex,
+          bh.questionType.length,
+          undefined,
+          undefined
+        )
+      ) {
+        bh = await this.sd_OIZIQmUWVmoe7XIb(bh);
+        otherwiseFlag = false;
+      }
+      if (
+        this.sdService.operators['else'](
+          otherwiseFlag,
+          undefined,
+          undefined,
+          undefined
+        )
+      ) {
+        bh = await this.sd_el00JWMdLwCt5sLt(bh);
+        otherwiseFlag = false;
+      }
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_SlvgH0yJnZjjRwfj');
+    }
+  }
+
+  async sd_OIZIQmUWVmoe7XIb(bh) {
+    try {
+      bh.currentQKeyword =
+        bh.questionType[bh.startIndex] + ' ' + bh.input.body.keyword;
+      bh = await this.sd_K5SPJOh3dXt9OMLw(bh);
+      //appendnew_next_sd_OIZIQmUWVmoe7XIb
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_OIZIQmUWVmoe7XIb');
+    }
+  }
+
+  async sd_K5SPJOh3dXt9OMLw(bh) {
+    try {
+      const SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9BgInstance: SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg.encode_decode_url =
+        SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg.encode_decode_url.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9BgInstance.encodeURL(
+          bh.currentQKeyword
+        );
+      bh.encodedKeyword = outputVariables.local.response;
+
+      bh = await this.sd_HHX1h3RwLA514Zw0(bh);
+      //appendnew_next_sd_K5SPJOh3dXt9OMLw
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_K5SPJOh3dXt9OMLw');
+    }
+  }
+
+  async sd_HHX1h3RwLA514Zw0(bh) {
+    try {
+      const SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cSInstance: SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS.staticdata =
+        SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS.staticdata.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cSInstance.getGoogleDomain();
+      bh.googleDomain = outputVariables.local.response;
+
+      bh = await this.sd_XkiHTrInpYVtjcdM(bh);
+      //appendnew_next_sd_HHX1h3RwLA514Zw0
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_HHX1h3RwLA514Zw0');
+    }
+  }
+
   async sd_XkiHTrInpYVtjcdM(bh) {
     try {
-      bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;
-      console.log(bh);
-      bh = await this.sd_blCO2tVU0C5MQfxs(bh);
+      // bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;
+      bh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=en-US&q=${bh.encodedKeyword.encodedURL}`;
+
+      // encodedKeyword
+      bh = await this.sd_fNEqmjVUCbk8gy5A(bh);
       //appendnew_next_sd_XkiHTrInpYVtjcdM
       return bh;
     } catch (e) {
       return await this.errorHandler(bh, e, 'sd_XkiHTrInpYVtjcdM');
+    }
+  }
+
+  async sd_fNEqmjVUCbk8gy5A(bh) {
+    try {
+      const SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cSInstance: SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS.staticdata =
+        SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS.staticdata.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cSInstance.randomAgent();
+      bh.userAgent = outputVariables.local.response;
+
+      bh = await this.sd_blCO2tVU0C5MQfxs(bh);
+      //appendnew_next_sd_fNEqmjVUCbk8gy5A
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_fNEqmjVUCbk8gy5A');
     }
   }
 
@@ -171,7 +300,7 @@ export class faqExplorer {
         url: bh.ssdUrl,
         timeout: 30000,
         method: 'get',
-        headers: {},
+        headers: bh.userAgent,
         followRedirects: true,
         cookies: undefined,
         authType: undefined,
@@ -213,7 +342,7 @@ export class faqExplorer {
       );
 
       bh.response = responseMsg;
-      await this.sd_el00JWMdLwCt5sLt(bh);
+      bh = await this.sd_r9al7KTtK93ijKhm(bh);
       //appendnew_next_sd_blCO2tVU0C5MQfxs
       return bh;
     } catch (e) {
@@ -221,9 +350,25 @@ export class faqExplorer {
     }
   }
 
+  async sd_r9al7KTtK93ijKhm(bh) {
+    try {
+      bh.preparedQuestion.push({
+        keyword: bh.input.body.keyword,
+        questions: bh.response.payload[1],
+        questionType: bh.questionType[bh.startIndex],
+      });
+      bh.startIndex = bh.startIndex + 1;
+      bh = await this.sd_SlvgH0yJnZjjRwfj(bh);
+      //appendnew_next_sd_r9al7KTtK93ijKhm
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_r9al7KTtK93ijKhm');
+    }
+  }
+
   async sd_el00JWMdLwCt5sLt(bh) {
     try {
-      bh.web.res.status(200).send(bh.response);
+      bh.web.res.status(200).send(bh.preparedQuestion);
 
       return bh;
     } catch (e) {
