@@ -1,0 +1,13 @@
+{
+    "displayName": "web-tools-apis",
+    "appName": "web-tools-apis",
+    "description": "Api's",
+    "lastModified": "2021-11-01T12:11:14.009Z",
+    "imgSourcePath": "",
+    "version": "1.0.0",
+    "appType": "apiOnly",
+    "templateName": "blank",
+    "createDate": "2021-11-01T12:11:13.257Z",
+    "analyticsId": "6c5c864c-1671-9d37-4f8e-6c48953e2889",
+    "createdStudioVersion": "8.0.0"
+}
