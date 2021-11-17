@@ -65,7 +65,7 @@
         "inputs": 0,
         "outputs": 1,
         "category": "HTTP",
-        "x": 125,
+        "x": 45,
         "y": 220,
         "wires": [
             [
@@ -288,14 +288,14 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "// bh.encodedKeyword\n\nbh.questionType = [\n    \"how\",\n    \"where\",\n    \"why\",\n    \"when\",\n    \"what\",\n    \"who\"\n];\n\nbh.startIndex = 0;\n\nbh.preparedQuestion = [];",
+        "script": "// bh.encodedKeyword\n\nbh.questionType = [\n    \"how\",\n    \"where\",\n    \"why\",\n    \"when\",\n    \"what\",\n    \"who\"\n];\n\nbh.startIndex = 0;\n\nbh.preparedQuestion = [];\n\nbh.inserSQLtQuery = `INSERT INTO keyword_planner (keyword) VALUES (\"${bh.input.body.keyword}\")`;",
         "functionName": "sd_5MBPbRvj14Ey8js5",
         "category": "Function",
-        "x": 250,
+        "x": 145,
         "y": 220,
         "wires": [
             [
-                "sd_SlvgH0yJnZjjRwfj"
+                "sd_M0w2MHIDZPgQenF6"
             ]
         ],
         "__n_excludedFromValidation__": {},
@@ -478,6 +478,40 @@
         "wires": [
             [
                 "sd_XkiHTrInpYVtjcdM"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_M0w2MHIDZPgQenF6",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "databaseConfig": "sd_3oeBBHXnj8SVafWm",
+        "resultMap": {
+            "type": "bh",
+            "value": "sqlInsertResponse"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh",
+            "value": "inserSQLtQuery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "mysql",
+        "functionName": "sd_M0w2MHIDZPgQenF6",
+        "category": "Storage",
+        "x": 245,
+        "y": 220,
+        "wires": [
+            [
+                "sd_SlvgH0yJnZjjRwfj"
             ]
         ],
         "__n_excludedFromValidation__": {},
