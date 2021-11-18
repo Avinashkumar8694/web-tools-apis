@@ -64,6 +64,7 @@
         "nodemailer": "6.4.17",
         "openid-client": "3.4.0",
         "poplib": "0.1.7",
+        "prettier": "^2.4.1",
         "request": "2.88.0",
         "strong-soap": "1.22.1",
         "swagger-ui-express": "4.0.7",
