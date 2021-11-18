@@ -1,0 +1,389 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "type": "tab",
+        "createdDate": "2021-11-18T09:16:31.209Z",
+        "label": "prettify",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "prettify",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_nMJWisxTKrzz7Y3W",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "prettifyCode",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "data",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "parser",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "prettifyCode",
+        "category": "General",
+        "x": 105,
+        "y": 200,
+        "wires": [
+            [
+                "sd_U4jp8zFqFgMmO1Zz"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "prettify"
+    },
+    {
+        "id": "sd_j3zPlCIZ2ZMXyuER",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getPrettierConfig",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "parser",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "response",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "getPrettierConfig",
+        "category": "General",
+        "x": 105,
+        "y": 80,
+        "wires": [
+            [
+                "sd_8x9Jgp957aQ6p9Lf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "prettify"
+    },
+    {
+        "id": "sd_8x9Jgp957aQ6p9Lf",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.parserConfig = {\n    'typescript': { semi: true, singleQuote: true, parser: 'typescript' },\n    'html': {\n        semi: true,\n        singleQuote: true,\n        parser: 'html',\n        quoteProps: 'as-needed',\n        trailingComma: 'es5',\n        useTabs: true,\n        tabWidth: 4,\n    },\n    'js': {\n        semi: true,\n        singleQuote: true,\n        quoteProps: 'as-needed',\n        trailingComma: 'es5',\n        useTabs: true,\n        tabWidth: 4\n    },\n    'babel': {\n        printWidth: 140,\n        singleQuote: true,\n        quoteProps: 'as-needed',\n        trailingComma: 'es5',\n        useTabs: true,\n        tabWidth: 4,\n        semi: true,\n        bracketSpacing: true,\n        arrowParens: 'avoid',\n        parser: 'babel',\n    },\n};\nif (Object.keys(bh.parserConfig).includes(bh.input.parser)) {\n    bh.local.response = bh.parserConfig[bh.input.parser];\n} else{\n    bh.local.response = '';\n}",
+        "functionName": "sd_8x9Jgp957aQ6p9Lf",
+        "category": "Function",
+        "x": 225,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_U4jp8zFqFgMmO1Zz",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+            "type": "tab",
+            "createdDate": "2021-11-18T09:16:31.209Z",
+            "label": "prettify",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_j3zPlCIZ2ZMXyuER",
+            "flowName": "getPrettierConfig"
+        },
+        "inputVariables": [
+            {
+                "key": "parser",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "parser"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "prettierConfig",
+                "mapVarName": "response",
+                "localVar": "bh.prettierConfig"
+            }
+        ],
+        "callService": "./prettify",
+        "startName": "getPrettierConfig",
+        "inputParams": [
+            "bh.input.parser"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_U4jp8zFqFgMmO1Zz",
+        "category": "General",
+        "x": 240,
+        "y": 200,
+        "wires": [
+            [
+                "sd_x7A31cF1qD05aUhQ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_x7A31cF1qD05aUhQ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const prettier = require('prettier');\nbh.local.response = { response : prettier.format(bh.input.data, bh.prettierConfig)};\n",
+        "functionName": "sd_x7A31cF1qD05aUhQ",
+        "category": "Function",
+        "x": 420,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_rZgQdX6M0RzabTAx",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "prettify",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "prettify": {
+                "post": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "prettify",
+                            "description": "add code to prettify",
+                            "required": true
+                        }
+                    ],
+                    "responses": {}
+                }
+            }
+        },
+        "uploadFileOptions": {},
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "prettify",
+                    "desc": "add code to prettify",
+                    "type": "body",
+                    "required": true,
+                    "rowId": "sd_oyopbWlF9lcRksTz",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 120,
+        "y": 360,
+        "wires": [
+            [
+                "sd_lAJC8xyeoKM7iGSV"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "prettify",
+        "functionName": "sd_rZgQdX6M0RzabTAx"
+    },
+    {
+        "id": "sd_CFLep8DSCss7u237",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.response",
+            "send": "bh.response"
+        },
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_CFLep8DSCss7u237",
+        "category": "HTTP",
+        "x": 440,
+        "y": 360,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_lAJC8xyeoKM7iGSV",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv",
+            "type": "tab",
+            "createdDate": "2021-11-18T09:16:31.209Z",
+            "label": "prettify",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_nMJWisxTKrzz7Y3W",
+            "flowName": "prettifyCode"
+        },
+        "inputVariables": [
+            {
+                "key": "data",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.code"
+            },
+            {
+                "key": "parser",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body.parser"
+            }
+        ],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "response",
+                "valueType": "bh",
+                "value": "response",
+                "mapVarName": "response",
+                "localVar": "bh.response"
+            }
+        ],
+        "callService": "./prettify",
+        "startName": "prettifyCode",
+        "inputParams": [
+            "bh.input.body.code",
+            "bh.input.body.parser"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_lAJC8xyeoKM7iGSV",
+        "category": "General",
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "sd_CFLep8DSCss7u237"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    }
+]

@@ -1,4 +1,6 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-prettify-SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv
+import { prettify as SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv } from './sd-services/prettify';
 //CORE_REFERENCE_IMPORT-staticdata-SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS
 import { staticdata as SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS } from './sd-services/staticdata';
 //CORE_REFERENCE_IMPORT-encode_decode_url-SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg
@@ -8,6 +10,8 @@ import { faqExplorer as SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc } from './sd-services
 
 export const UserRoutes = [
     //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-prettify-SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv
+SSD_SERVICE_ID_sd_wUVRlCWF54jFkhfv,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-staticdata-SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS
 SSD_SERVICE_ID_sd_fpEwNEv7m8vBG6cS,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-encode_decode_url-SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg
