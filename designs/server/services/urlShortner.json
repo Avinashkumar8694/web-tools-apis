@@ -1,0 +1,726 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "type": "tab",
+        "createdDate": "2021-11-18T13:54:28.974Z",
+        "label": "urlShortner",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "urlShortner",
+        "relativeParentPath": ""
+    },
+    {
+        "id": "sd_fJzGgP8x1besAFgj",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "urlshortnerdata",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "urlshortnerdata",
+        "category": "General",
+        "x": 465,
+        "y": 80,
+        "wires": [
+            [
+                "sd_kBB8H7hegeKslGX9"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "urlShortner"
+    },
+    {
+        "id": "sd_kBB8H7hegeKslGX9",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.root_url = \"http://localhost:8081/\";\nbh.local.min_vanity_length = 4;\nbh.local.num_of_urls_per_hour = 50;\n\nbh.local.get_query = 'SELECT * FROM urls WHERE segment = {SEGMENT}';\nbh.local.add_query = 'INSERT INTO urls SET url = {URL}, segment = {SEGMENT}, ip = {IP}';\nbh.local.check_url_query = 'SELECT * FROM urls WHERE url = {URL}';\nbh.local.update_views_query = 'UPDATE urls SET num_of_clicks = {VIEWS} WHERE id = {ID}';\nbh.local.insert_view = 'INSERT INTO stats SET ip = {IP}, url_id = {URL_ID}, referer = {REFERER}';\nbh.local.check_ip_query = 'SELECT COUNT(id) as counted FROM urls WHERE datetime_added >= now() - INTERVAL 1 HOUR AND ip = {IP}';\n\nbh.local.host = 'localhost';\nbh.local.user = 'root';\nbh.local.password = 'password';\nbh.local.database = 'urlsh';",
+        "functionName": "sd_kBB8H7hegeKslGX9",
+        "category": "Function",
+        "x": 605,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true,
+        "serviceName": "urlShortner"
+    },
+    {
+        "id": "sd_74KvI4GEyEGG9xrK",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "selecturl",
+        "databaseConfig": "sd_3oeBBHXnj8SVafWm",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "selectediplist"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "selectipquery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "mysql",
+        "functionName": "selecturl",
+        "category": "Storage",
+        "x": 365,
+        "y": 580,
+        "wires": [
+            [
+                "sd_YCWoPP0jM1M4pIJ3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "urlShortner",
+        "generated": true
+    },
+    {
+        "id": "sd_6pbnasiK3pnTIq04",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "txt",
+        "responseMapping": {
+            "status": 200,
+            "txt": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_6pbnasiK3pnTIq04",
+        "category": "HTTP",
+        "x": 305,
+        "y": 80,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true,
+        "serviceName": "urlShortner"
+    },
+    {
+        "id": "sd_tWE9MakdJmzJoLDH",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "getIPInfo",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "getIPInfo": {
+                "get": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [],
+                    "responses": {}
+                }
+            }
+        },
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 80,
+        "y": 80,
+        "wires": [
+            [
+                "sd_SfWurpLSCEvwa8hL"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "urlShortner",
+        "functionName": "sd_tWE9MakdJmzJoLDH"
+    },
+    {
+        "id": "sd_GFwX9C6wKPFaqBfL",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "getIp",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "accept_bh": true,
+        "functionName": "getIp",
+        "category": "General",
+        "x": 465,
+        "y": 180,
+        "wires": [
+            [
+                "sd_oPiU86Sxr5FR8KbF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "urlShortner"
+    },
+    {
+        "id": "sd_oPiU86Sxr5FR8KbF",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.userip = bh.web.req.header(\"x-forwarded-for\") || bh.web.req.connection.remoteAddress;",
+        "functionName": "sd_oPiU86Sxr5FR8KbF",
+        "category": "Function",
+        "x": 570,
+        "y": 180,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_SfWurpLSCEvwa8hL",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+            "type": "tab",
+            "createdDate": "2021-11-18T13:54:28.974Z",
+            "label": "urlShortner",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_GFwX9C6wKPFaqBfL",
+            "flowName": "getIp"
+        },
+        "inputVariables": [],
+        "outputMapping": [],
+        "callService": "./urlShortner",
+        "startName": "getIp",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_SfWurpLSCEvwa8hL",
+        "category": "General",
+        "x": 185,
+        "y": 80,
+        "wires": [
+            [
+                "sd_6pbnasiK3pnTIq04"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_LY7ISPOSwE5OUI4y",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "addURLtoShortner",
+        "outputs": 1,
+        "accept_bh": true,
+        "functionName": "addURLtoShortner",
+        "category": "General",
+        "x": 85,
+        "y": 500,
+        "wires": [
+            [
+                "sd_2h4aq2FFPQX9Br3W"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "urlShortner"
+    },
+    {
+        "id": "sd_HhLyTCLhASSdO5xL",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.selectipquery = bh.local.check_ip_query.replace(\"{IP}\", `'${bh.local.userip}'`);\n",
+        "functionName": "sd_HhLyTCLhASSdO5xL",
+        "category": "Function",
+        "x": 285,
+        "y": 400,
+        "wires": [
+            [
+                "sd_74KvI4GEyEGG9xrK"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_2h4aq2FFPQX9Br3W",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+            "type": "tab",
+            "createdDate": "2021-11-18T13:54:28.974Z",
+            "label": "urlShortner",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_fJzGgP8x1besAFgj",
+            "flowName": "urlshortnerdata"
+        },
+        "inputVariables": [],
+        "outputMapping": [],
+        "callService": "./urlShortner",
+        "startName": "urlshortnerdata",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_2h4aq2FFPQX9Br3W",
+        "category": "General",
+        "x": 165,
+        "y": 400,
+        "wires": [
+            [
+                "sd_dkerVfV16vZJ7NbO"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_dkerVfV16vZJ7NbO",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+            "type": "tab",
+            "createdDate": "2021-11-18T13:54:28.974Z",
+            "label": "urlShortner",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_GFwX9C6wKPFaqBfL",
+            "flowName": "getIp"
+        },
+        "inputVariables": [],
+        "outputMapping": [],
+        "callService": "./urlShortner",
+        "startName": "getIp",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_dkerVfV16vZJ7NbO",
+        "category": "General",
+        "x": 225,
+        "y": 580,
+        "wires": [
+            [
+                "sd_HhLyTCLhASSdO5xL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_0cZ263VMmbtpn3TV",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "shortner/add",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "httpOptions": {
+            "shortner/add": {
+                "get": {
+                    "summary": "",
+                    "description": "",
+                    "consumes": [],
+                    "produces": [],
+                    "parameters": [
+                        {
+                            "in": "query",
+                            "name": "sortener data",
+                            "description": "{\"url\":\"google.com\",\"vanity\": \"\"}",
+                            "required": false
+                        }
+                    ],
+                    "responses": {}
+                }
+            }
+        },
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "sortener data",
+                    "desc": "{\"url\":\"google.com\",\"vanity\": \"\"}",
+                    "type": "query",
+                    "required": false,
+                    "rowId": "sd_2ZIhJBIwJx8zf0tP",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "category": "HTTP",
+        "x": 85,
+        "y": 300,
+        "wires": [
+            [
+                "sd_NrIYVa5MD5HcxsXS"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "urlShortner",
+        "functionName": "sd_0cZ263VMmbtpn3TV"
+    },
+    {
+        "id": "sd_FQf9FIdw05FGhrvq",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "response",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.response",
+            "send": "bh.local.response"
+        },
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_FQf9FIdw05FGhrvq",
+        "category": "HTTP",
+        "x": 360,
+        "y": 300,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_NrIYVa5MD5HcxsXS",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+            "type": "tab",
+            "createdDate": "2021-11-18T13:54:28.974Z",
+            "label": "urlShortner",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_LY7ISPOSwE5OUI4y",
+            "flowName": "addURLtoShortner"
+        },
+        "inputVariables": [],
+        "outputMapping": [],
+        "callService": "./urlShortner",
+        "startName": "addURLtoShortner",
+        "inputParams": [
+            "bh"
+        ],
+        "accept_bh": true,
+        "functionName": "sd_NrIYVa5MD5HcxsXS",
+        "category": "General",
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "sd_FQf9FIdw05FGhrvq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_YCWoPP0jM1M4pIJ3",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"selectediplist\",bh.local.selectediplist);\nbh.local.response = {\n    message: \"success\"\n}",
+        "functionName": "sd_YCWoPP0jM1M4pIJ3",
+        "category": "Function",
+        "x": 405,
+        "y": 400,
+        "wires": [
+            [
+                "sd_dyAJI12yGYCuLx89"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_dyAJI12yGYCuLx89",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "selectediplist",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.selectediplist",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "undefined && bh.local.selectediplist.counted < bh.local.num_of_urls_per_hour",
+                "vt": "literal",
+                "gv": "undefined && bh.local.selectediplist.counted < bh.local.num_of_urls_per_hour"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_dyAJI12yGYCuLx89",
+        "category": "Function",
+        "x": 485,
+        "y": 580,
+        "wires": [
+            [
+                "sd_jeoBb7vPGp3D5Ijp"
+            ],
+            [
+                "sd_KrMRS3Mp84W5LmRo"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_jeoBb7vPGp3D5Ijp",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"true\");\nbh.local.checkurlquery = bh.local.check_url_query.replace(\"{URL}\",decodeURIComponent(bh.input.params.url));",
+        "functionName": "sd_jeoBb7vPGp3D5Ijp",
+        "category": "Function",
+        "x": 560,
+        "y": 420,
+        "wires": [
+            [
+                "sd_eFc6PxNNanRrwDBS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_KrMRS3Mp84W5LmRo",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"false\");",
+        "functionName": "sd_KrMRS3Mp84W5LmRo",
+        "category": "Function",
+        "x": 565,
+        "y": 720,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_eFc6PxNNanRrwDBS",
+        "type": "ExecuteSql",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "selecturlquery",
+        "databaseConfig": "sd_3oeBBHXnj8SVafWm",
+        "resultMap": {
+            "type": "bh.local",
+            "value": "selectedurllist"
+        },
+        "multipleQuery": "",
+        "singleQuery": {
+            "type": "bh.local",
+            "value": "checkurlquery"
+        },
+        "inputs": 1,
+        "outputs": 1,
+        "params": [],
+        "dbType": "mysql",
+        "functionName": "selecturlquery",
+        "category": "Storage",
+        "x": 645,
+        "y": 580,
+        "wires": [
+            [
+                "sd_XL7xUctIUzQMugmr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_XL7xUctIUzQMugmr",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.local.selectedurllist)",
+        "functionName": "sd_XL7xUctIUzQMugmr",
+        "category": "Function",
+        "x": 705,
+        "y": 420,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    }
+]

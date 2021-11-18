@@ -463,7 +463,8 @@
             },
             "__n_excludedFromValidation__": {},
             "users": {
-                "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc": []
+                "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc": [],
+                "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8": []
             }
         },
         "sd_3oeBBHXnj8SVafWm": {
@@ -924,6 +925,10 @@
             "users": {
                 "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc": [
                     "sd_M0w2MHIDZPgQenF6"
+                ],
+                "SSD_SERVICE_ID_sd_lNz84AiGDNhByKU8": [
+                    "sd_74KvI4GEyEGG9xrK",
+                    "sd_eFc6PxNNanRrwDBS"
                 ]
             }
         }

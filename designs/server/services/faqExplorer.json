@@ -47,6 +47,7 @@
                 }
             }
         },
+        "uploadFileOptions": {},
         "editableListData": {
             "responses": [],
             "params": [
@@ -110,6 +111,7 @@
             "obj": "bh.preparedQuestion",
             "send": "bh.preparedQuestion"
         },
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "editableListData": {
@@ -137,14 +139,18 @@
         "nodeType": "flow",
         "name": "",
         "method": "get",
+        "methodMapping": "",
         "methodMappingObj": {},
+        "urlValue": "",
         "urlMapping": "bh.ssdUrl",
         "urlMappingObj": {
             "mapVarType": "bh",
             "mapVarValue": "ssdUrl"
         },
         "ret": "json",
+        "retMapping": "",
         "retMappingObj": {},
+        "reqBody": "",
         "reqBodyObj": {
             "mapVarType": "bh",
             "mapVarValue": ""
@@ -154,6 +160,8 @@
             "mapVarType": "bh",
             "mapVarValue": "response"
         },
+        "headers": [],
+        "headersObj": {},
         "headerMapping": "bh.userAgent",
         "headerMappingObj": {
             "mapVarType": "bh",
@@ -161,8 +169,12 @@
         },
         "params": {},
         "paramsObj": [],
+        "paramMapping": "",
         "paramMappingObj": {},
+        "authType": "",
         "useAuthTypeMappingObj": {},
+        "useAuthTypeMap": {},
+        "useAuthType": "",
         "useAuthUsername": "",
         "useAuthUsernameMappingObj": "",
         "useAuthPassword": "",
@@ -178,6 +190,7 @@
         "proxy": "",
         "useProxy": false,
         "usetls": false,
+        "cookies": [],
         "cookiesMapObj": {},
         "cookiesList": {},
         "switchStates": {
@@ -492,6 +505,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_3oeBBHXnj8SVafWm",
+        "queryType": "",
         "resultMap": {
             "type": "bh",
             "value": "sqlInsertResponse"
@@ -504,6 +518,7 @@
         "inputs": 1,
         "outputs": 1,
         "params": [],
+        "paramMappingObj": {},
         "dbType": "mysql",
         "functionName": "sd_M0w2MHIDZPgQenF6",
         "category": "Storage",

@@ -205,7 +205,7 @@ export class faqExplorer {
       } else {
         throw new Error('Cannot find the selected config name');
       }
-      let params = [];
+      let params = undefined;
       params = params ? params : [];
       bh.sqlInsertResponse = await new GenericRDBMSOperations().executeSQL(
         connectionName,
@@ -336,7 +336,7 @@ export class faqExplorer {
         method: 'get',
         headers: bh.userAgent,
         followRedirects: true,
-        cookies: undefined,
+        cookies: {},
         authType: undefined,
         body: undefined,
         paytoqs: false,
