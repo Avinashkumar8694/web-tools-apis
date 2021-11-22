@@ -336,7 +336,7 @@ export class encode_decode_url {
 
   async sd_AYWwKPM8gskMBjJy(bh) {
     try {
-      const { encode } = require('url-encode-decode');
+      const { decode } = require('url-encode-decode');
 
       if (bh.input.url) {
         bh.local.response = {
