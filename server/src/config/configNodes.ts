@@ -496,7 +496,7 @@ export default {
                 "multipleStatements": false,
                 "flags": "flags"
             },
-            "disabledb": false,
+            "disabledb": true,
             "selectedDB": "mysql",
             "selectedOption": "mysql",
             "dbCategory": "sql",
