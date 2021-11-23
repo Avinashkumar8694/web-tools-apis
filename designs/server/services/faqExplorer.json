@@ -70,7 +70,7 @@
         "y": 220,
         "wires": [
             [
-                "sd_M0w2MHIDZPgQenF6"
+                "sd_5MBPbRvj14Ey8js5"
             ]
         ],
         "__ssdTypeInputs__": {
@@ -301,16 +301,19 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "// bh.encodedKeyword\n\nbh.questionType = [\n    \"how\",\n    \"where\",\n    \"why\",\n    \"when\",\n    \"what\",\n    \"who\"\n];\n\nbh.startIndex = 0;\n\nbh.preparedQuestion = [];\n\nbh.inserSQLtQuery = `INSERT INTO keyword_planner (keyword) VALUES (\"${bh.input.body.keyword}\")`;",
+        "script": "// bh.encodedKeyword\n\nbh.questionType = [\n    \"how\",\n    \"where\",\n    \"why\",\n    \"when\",\n    \"what\",\n    \"who\"\n];\n\nbh.startIndex = 0;\n\nbh.preparedQuestion = [];\n\nbh.inserSQLtQuery = `INSERT INTO faq (keyword) VALUES (\"${bh.input.body.keyword}\")`;",
         "functionName": "sd_5MBPbRvj14Ey8js5",
         "category": "Function",
         "x": 145,
-        "y": 180,
+        "y": 220,
         "wires": [
-            []
+            [
+                "sd_M0w2MHIDZPgQenF6"
+            ]
         ],
         "__n_excludedFromValidation__": {},
-        "generateNext": true
+        "generateNext": false,
+        "generated": true
     },
     {
         "id": "sd_SlvgH0yJnZjjRwfj",

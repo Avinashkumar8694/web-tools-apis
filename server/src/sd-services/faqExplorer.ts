@@ -152,7 +152,7 @@ export class faqExplorer {
             res,
             next
           );
-          bh = await this.sd_M0w2MHIDZPgQenF6(bh);
+          bh = await this.sd_5MBPbRvj14Ey8js5(bh);
           //appendnew_next_sd_l7v0aBED78AfqR9t
         } catch (e) {
           return await this.errorHandler(bh, e, 'sd_l7v0aBED78AfqR9t');
@@ -169,6 +169,25 @@ export class faqExplorer {
   //   service flows_faqExplorer
 
   //appendnew_flow_faqExplorer_start
+
+  async sd_5MBPbRvj14Ey8js5(bh) {
+    try {
+      // bh.encodedKeyword
+
+      bh.questionType = ['how', 'where', 'why', 'when', 'what', 'who'];
+
+      bh.startIndex = 0;
+
+      bh.preparedQuestion = [];
+
+      bh.inserSQLtQuery = `INSERT INTO faq (keyword) VALUES ("${bh.input.body.keyword}")`;
+      bh = await this.sd_M0w2MHIDZPgQenF6(bh);
+      //appendnew_next_sd_5MBPbRvj14Ey8js5
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_5MBPbRvj14Ey8js5');
+    }
+  }
 
   async sd_M0w2MHIDZPgQenF6(bh) {
     try {
