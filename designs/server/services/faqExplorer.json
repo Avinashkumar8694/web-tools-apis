@@ -221,7 +221,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "// bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nbh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.currentFaqLanguage}&q=${bh.encodedKeyword.encodedURL}`;\n\n// encodedKeyword",
+        "script": "// bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nbh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.input.body.country}&q=${bh.encodedKeyword.encodedURL}`;\n\n// encodedKeyword",
         "functionName": "sd_XkiHTrInpYVtjcdM",
         "category": "Function",
         "x": 725,
@@ -505,6 +505,7 @@
         "nodeType": "flow",
         "name": "",
         "databaseConfig": "sd_3oeBBHXnj8SVafWm",
+        "queryType": "",
         "resultMap": {
             "type": "bh",
             "value": "sqlInsertResponse"
@@ -517,6 +518,7 @@
         "inputs": 1,
         "outputs": 1,
         "params": [],
+        "paramMappingObj": {},
         "dbType": "mysql",
         "functionName": "sd_M0w2MHIDZPgQenF6",
         "category": "Storage",

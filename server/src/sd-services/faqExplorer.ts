@@ -205,7 +205,7 @@ export class faqExplorer {
       } else {
         throw new Error('Cannot find the selected config name');
       }
-      let params = [];
+      let params = undefined;
       params = params ? params : [];
       bh.sqlInsertResponse = await new GenericRDBMSOperations().executeSQL(
         connectionName,
@@ -302,7 +302,7 @@ export class faqExplorer {
   async sd_XkiHTrInpYVtjcdM(bh) {
     try {
       // bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;
-      bh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.currentFaqLanguage}&q=${bh.encodedKeyword.encodedURL}`;
+      bh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.input.body.country}&q=${bh.encodedKeyword.encodedURL}`;
 
       // encodedKeyword
       bh = await this.sd_fNEqmjVUCbk8gy5A(bh);
