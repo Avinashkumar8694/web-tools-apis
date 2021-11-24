@@ -107,7 +107,7 @@ export class encode_decode_url {
             {
               in: 'body',
               name: 'encode url',
-              description: 'add a url o encode',
+              description: 'add a url o encode. ie: {"url":"Avinash Kumar"}',
               required: true,
             },
           ],
@@ -124,7 +124,7 @@ export class encode_decode_url {
           {
             in: 'body',
             name: 'encode url',
-            description: 'add a url o encode',
+            description: 'add a url o encode. ie: {"url":"Avinash Kumar"}',
             required: true,
           },
         ],
@@ -173,7 +173,7 @@ export class encode_decode_url {
             {
               in: 'body',
               name: 'encode url',
-              description: 'add a url o encode',
+              description: 'add a url o decode ie: {"url":"sd+sdsd"}',
               required: true,
             },
           ],
@@ -190,7 +190,7 @@ export class encode_decode_url {
           {
             in: 'body',
             name: 'encode url',
-            description: 'add a url o encode',
+            description: 'add a url o decode ie: {"url":"sd+sdsd"}',
             required: true,
           },
         ],
@@ -298,7 +298,7 @@ export class encode_decode_url {
         };
       } else {
         bh.local.response = {
-          encodedURL: 'url is required',
+          encodedURL: 'Invalid URL',
           httpStatus: 400,
         };
       }
@@ -345,7 +345,7 @@ export class encode_decode_url {
         };
       } else {
         bh.local.response = {
-          decodedURL: 'url is required',
+          decodedURL: 'Invalid URL',
           httpStatus: 400,
         };
       }

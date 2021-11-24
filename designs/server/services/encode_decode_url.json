@@ -60,7 +60,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "const { encode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        encodedURL: encode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        encodedURL: \"url is required\",\n        httpStatus: 400\n    }\n}",
+        "script": "const { encode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        encodedURL: encode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        encodedURL: \"Invalid URL\",\n        httpStatus: 400\n    }\n}",
         "functionName": "sd_egnWKpcL90veUtVt",
         "category": "Function",
         "x": 185,
@@ -101,7 +101,7 @@
                         {
                             "in": "body",
                             "name": "encode url",
-                            "description": "add a url o encode",
+                            "description": "add a url o encode. ie: {\"url\":\"Avinash Kumar\"}",
                             "required": true
                         }
                     ],
@@ -109,13 +109,12 @@
                 }
             }
         },
-        "uploadFileOptions": {},
         "editableListData": {
             "responses": [],
             "params": [
                 {
                     "key": "encode url",
-                    "desc": "add a url o encode",
+                    "desc": "add a url o encode. ie: {\"url\":\"Avinash Kumar\"}",
                     "type": "body",
                     "required": true,
                     "rowId": "sd_Kcz5ALjwoiINCB1l",
@@ -173,6 +172,7 @@
             "txt": "bh.encodeResponse.encodedURL",
             "send": "bh.encodeResponse.encodedURL"
         },
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "editableListData": {
@@ -300,7 +300,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "const { encode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        decodedURL: decode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        decodedURL: \"url is required\",\n        httpStatus: 400\n    }\n}",
+        "script": "const { decode } = require('url-encode-decode');\n\nif(bh.input.url){\n    bh.local.response = {\n        decodedURL: decode(bh.input.url),\n        httpStatus: 200\n    }\n} else {\n    bh.local.response = {\n        decodedURL: \"Invalid URL\",\n        httpStatus: 400\n    }\n}",
         "functionName": "sd_AYWwKPM8gskMBjJy",
         "category": "Function",
         "x": 185,
@@ -318,7 +318,7 @@
         "z": "SSD_SERVICE_ID_sd_qRvCWKKLZBnOI9Bg",
         "viewType": "server",
         "nodeType": "start",
-        "name": "decodeurl",
+        "name": "decodeurl ",
         "path": "decodeurl",
         "uploadpath": "",
         "summary": "",
@@ -340,7 +340,7 @@
                         {
                             "in": "body",
                             "name": "encode url",
-                            "description": "add a url o encode",
+                            "description": "add a url o decode ie: {\"url\":\"sd+sdsd\"}",
                             "required": true
                         }
                     ],
@@ -348,13 +348,12 @@
                 }
             }
         },
-        "uploadFileOptions": {},
         "editableListData": {
             "responses": [],
             "params": [
                 {
                     "key": "encode url",
-                    "desc": "add a url o encode",
+                    "desc": "add a url o decode ie: {\"url\":\"sd+sdsd\"}",
                     "type": "body",
                     "required": true,
                     "rowId": "sd_Kcz5ALjwoiINCB1l",
@@ -412,6 +411,7 @@
             "txt": "bh.encodeResponse.decodedURL",
             "send": "bh.encodeResponse.decodedURL"
         },
+        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "editableListData": {
