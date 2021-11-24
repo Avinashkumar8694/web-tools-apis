@@ -921,7 +921,11 @@
                 }
             },
             "__n_excludedFromValidation__": {},
-            "users": {}
+            "users": {
+                "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc": [
+                    "sd_M0w2MHIDZPgQenF6"
+                ]
+            }
         }
     }
 }

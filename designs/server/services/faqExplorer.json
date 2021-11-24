@@ -124,7 +124,7 @@
         },
         "functionName": "sd_el00JWMdLwCt5sLt",
         "category": "HTTP",
-        "x": 965,
+        "x": 1145,
         "y": 220,
         "wires": [],
         "__n_excludedFromValidation__": {},
@@ -221,7 +221,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "// bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nbh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=en-US&q=${bh.encodedKeyword.encodedURL}`;\n\n// encodedKeyword",
+        "script": "// bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;\nbh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.currentFaqLanguage}&q=${bh.encodedKeyword.encodedURL}`;\n\n// encodedKeyword",
         "functionName": "sd_XkiHTrInpYVtjcdM",
         "category": "Function",
         "x": 725,
@@ -362,7 +362,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "",
-        "script": "bh.currentQKeyword = bh.questionType[bh.startIndex] + ' ' +  bh.input.body.keyword;",
+        "script": "bh.currentQKeyword = bh.questionType[bh.startIndex] + ' ' +  bh.input.body.keyword;\nbh.currentFaqLanguage = bh.input.body.language;",
         "functionName": "sd_OIZIQmUWVmoe7XIb",
         "category": "Function",
         "x": 505,
@@ -527,6 +527,98 @@
                 "sd_SlvgH0yJnZjjRwfj"
             ]
         ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_Fmv2HqRFCv0s5Afk",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_u6mKftp92K7KYj3v",
+            "sd_BkNK0p9eVgpI3Bs8"
+        ],
+        "functionName": "sd_Fmv2HqRFCv0s5Afk",
+        "category": "General",
+        "x": 945,
+        "y": 440,
+        "wires": [
+            [
+                "sd_u6mKftp92K7KYj3v"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "faqExplorer"
+    },
+    {
+        "id": "sd_u6mKftp92K7KYj3v",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.httpresponse = {\n    error: bh.error,\n    statusCode: 400\n}",
+        "functionName": "sd_u6mKftp92K7KYj3v",
+        "category": "Function",
+        "x": 1065,
+        "y": 440,
+        "wires": [
+            [
+                "sd_BkNK0p9eVgpI3Bs8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "generated": true
+    },
+    {
+        "id": "sd_BkNK0p9eVgpI3Bs8",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_xBegjWCxUMRmUPfc",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "httpresponse",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh.local",
+            "value": "httpresponse.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "responseMapping": {
+            "status": "bh.local.httpresponse.statusCode",
+            "obj": "bh.local.httpresponse",
+            "send": "bh.local.httpresponse"
+        },
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "editableListData": {
+            "headers": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_BkNK0p9eVgpI3Bs8",
+        "category": "HTTP",
+        "x": 1140,
+        "y": 440,
+        "wires": [],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
         "generated": true

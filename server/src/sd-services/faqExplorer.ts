@@ -256,6 +256,7 @@ export class faqExplorer {
     try {
       bh.currentQKeyword =
         bh.questionType[bh.startIndex] + ' ' + bh.input.body.keyword;
+      bh.currentFaqLanguage = bh.input.body.language;
       bh = await this.sd_K5SPJOh3dXt9OMLw(bh);
       //appendnew_next_sd_OIZIQmUWVmoe7XIb
       return bh;
@@ -301,7 +302,7 @@ export class faqExplorer {
   async sd_XkiHTrInpYVtjcdM(bh) {
     try {
       // bh.ssdUrl = `https://www.google.com/complete/search?hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=a&xhr=t`;
-      bh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=en-US&q=${bh.encodedKeyword.encodedURL}`;
+      bh.ssdUrl = `http://${bh.googleDomain}/complete/search?output=json&client=firefox&hl=${bh.currentFaqLanguage}&q=${bh.encodedKeyword.encodedURL}`;
 
       // encodedKeyword
       bh = await this.sd_fNEqmjVUCbk8gy5A(bh);
@@ -410,6 +411,32 @@ export class faqExplorer {
     }
   }
 
+  async sd_u6mKftp92K7KYj3v(bh) {
+    try {
+      bh.local.httpresponse = {
+        error: bh.error,
+        statusCode: 400,
+      };
+      await this.sd_BkNK0p9eVgpI3Bs8(bh);
+      //appendnew_next_sd_u6mKftp92K7KYj3v
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_u6mKftp92K7KYj3v');
+    }
+  }
+
+  async sd_BkNK0p9eVgpI3Bs8(bh) {
+    try {
+      bh.web.res
+        .status(bh.local.httpresponse.statusCode)
+        .send(bh.local.httpresponse);
+
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(bh, e, 'sd_BkNK0p9eVgpI3Bs8');
+    }
+  }
+
   //appendnew_node
 
   async errorHandler(bh, e, src) {
@@ -418,7 +445,8 @@ export class faqExplorer {
     bh.errorSource = src;
 
     if (
-      false
+      false ||
+      (await this.sd_Fmv2HqRFCv0s5Afk(bh))
       /*appendnew_next_Catch*/
     ) {
       return bh;
@@ -429,6 +457,15 @@ export class faqExplorer {
         throw e;
       }
     }
+  }
+  async sd_Fmv2HqRFCv0s5Afk(bh) {
+    const catchConnectedNodes = ['sd_u6mKftp92K7KYj3v', 'sd_BkNK0p9eVgpI3Bs8'];
+    if (catchConnectedNodes.includes(bh.errorSource)) {
+      return false;
+    }
+    bh = await this.sd_u6mKftp92K7KYj3v(bh);
+    //appendnew_next_sd_Fmv2HqRFCv0s5Afk
+    return true;
   }
   //appendnew_flow_faqExplorer_Catch
 }
